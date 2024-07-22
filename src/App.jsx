@@ -60,7 +60,7 @@ const App = () => {
     const adviceIndex = favoriteAdvices.findIndex(
       favoriteAdvice => favoriteAdvice.id === advice.id
     );
-  
+
     return adviceIndex;
   };
 
@@ -72,7 +72,7 @@ const App = () => {
       const newFavoriteAdvices = [ ...favoriteAdvices ];
 
       newFavoriteAdvices.splice(adviceIndex, 1);
-      
+
       setFavoriteAdvices(newFavoriteAdvices);
       localStorage.setItem(
         'favoriteAdvicesLS',
@@ -80,21 +80,21 @@ const App = () => {
       );
     } else {
       //adauga advice
-      const newFavoriteAdvices = [ 
-        ...favoriteAdvices, 
+      const newFavoriteAdvices = [
+        ...favoriteAdvices,
         {
           id: advice.id,
           content: advice.content,
           addedAt: getCurrentDateFormatted(),
         },
       ];
-  
+
       setFavoriteAdvices(newFavoriteAdvices);
       localStorage.setItem(
         'favoritedAdvicesLS',
         JSON.stringify(newFavoriteAdvices),
       );
-    }; 
+    }
   };
 
   const removeAdviceFromFavorites = adviceId => {
@@ -120,22 +120,22 @@ const App = () => {
 
   return (
       <section className='app-container'>
-        <button onClick={handleModalOpening} className='show-favorites'> 
+        <button onClick={handleModalOpening} className='show-favorites'>
         Show favorites
         </button>
         { isOpen === true ? (
-          <FavoriteAdvicesModal 
-            advices={favoriteAdvices} 
-            setIsOpen={closeModal} 
+          <FavoriteAdvicesModal
+            advices={favoriteAdvices}
+            setIsOpen={closeModal}
             removeAdvice={removeAdviceFromFavorites}
           />
         ) : null}
-        
+
         <div className='advice-slip-container'>
-          <button 
-            onClick={handleAdviceToFavorites} 
+          <button
+            onClick={handleAdviceToFavorites}
             className='toggle-favorite-button'
-          > 
+          >
             {getAdviceIndex() === -1 ? (
             <FavoriteBorderIcon/>
             ) : (
@@ -145,7 +145,7 @@ const App = () => {
           {advice !== null ? (
           <>
             <p className='advice-id'> ADVICE #{advice.id} </p>
-            <p className='advice-content'> "{advice.content}" </p>
+            <p className='advice-content'> {advice.content} </p>
           </>
           ) : (
             <p> Loading... </p>
@@ -155,14 +155,14 @@ const App = () => {
             < PauseIcon style={{ color: '#cee3e9'}} />
             <hr />
           </div>
-          <button 
-            onClick={handleGenerateAdvice} 
-            className='advice-button' 
+          <button
+            onClick={handleGenerateAdvice}
+            className='advice-button'
             disabled={isLoading === true ? true : false}
           >
             {
               isLoading === true ? (
-                <div className='spinner'> </div> 
+                <div className='spinner'> </div>
               ) : (
               < Dice fontSize={'large'} />)
             }
